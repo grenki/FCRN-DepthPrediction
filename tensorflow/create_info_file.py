@@ -22,7 +22,7 @@ def create_folders(string):
     for p in split:
         if p.endswith('.png'):
             continue
-        base += p
+        base += p + '/'
         if not os.path.exists(base):
             os.mkdir(base)
 
