@@ -56,10 +56,10 @@ def predict(prediction_func, image_path, channel_to_change=2, visualize=False):
     # Evalute the network for the given image
     pred = prediction_func(img)
 
-    pred = np.uint8(np.resize(pred, pred.shape[1:3]) * 50)
+    pred = np.uint8(np.minimum(np.resize(pred, pred.shape[1:3]) * 13, 255))
     pred_resized = scipy.misc.imresize(pred, input_img.size, interp='cubic')
     result_img = np.asarray(input_img)
-    result_img.setflags(write=1)
+    result_img.setflags(write=True)
     result_img[:, :, channel_to_change] = pred_resized
 
     # Plot result
