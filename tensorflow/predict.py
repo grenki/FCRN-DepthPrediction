@@ -74,7 +74,7 @@ def predict(prediction_func, image_path, channel_to_change=2, visualize=False):
 
 def main():
     info_file_path = sys.argv[1]
-    img_paths = (s.split(' ') for s in open(info_file_path).read().split('\n'))
+    img_paths = (s.split(' ') for s in open(info_file_path).read().split('\n') if s)
 
     with tf.Session() as session:
         prediction_func = load_network(session, MODEL_PATH)
