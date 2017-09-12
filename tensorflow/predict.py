@@ -74,13 +74,14 @@ def predict(prediction_func, image_path, channel_to_change=2, visualize=False):
 
 def main():
     info_file_path = sys.argv[1]
-    img_paths = (s.split(' ') for s in open(info_file_path).read().split('\n') if s)
+    img_paths = [s.split(' ') for s in open(info_file_path).read().split('\n') if s]
 
     with tf.Session() as session:
         prediction_func = load_network(session, MODEL_PATH)
 
         # Predict the image
-        for img_path, out_path in img_paths:
+        for ctr, (img_path, out_path) in enumerate(img_paths):
+            print 'Process image ' + str(ctr) + '/' + str(len(img_paths))
             modified_image = predict(prediction_func, img_path)
             Image.fromarray(modified_image).save(out_path)
 
